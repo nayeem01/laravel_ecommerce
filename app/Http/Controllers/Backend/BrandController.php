@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Backend\Brand;
 use Illuminate\Http\Request;
 use File;
-use  Image;
+use Image;
 
 class BrandController extends Controller
 {

@@ -13,7 +13,7 @@ Route::get('/', function () {
 
 Route::group(['prefix' => 'admin'], function () {
     
-    Route::get('/', [PageController::class,'dashboard'])->name('admin.dashboard');
+    Route::get('/dashboard', [PageController::class,'dashboard'])->name('admin.dashboard');
     //Route::get('/', 'App\Http\Controllers\Backend\PageController@dashboard')->name('admin.dashboard');
     Route::group(['prefix' => '/brands'], function () {
         Route::get('/manage', [BrandController::class,'index'])->name('brands.manage');

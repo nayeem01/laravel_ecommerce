@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Backend\PageController;
 use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\CategoryController;
+use App\Http\Controllers\Backend\ProductController;
 /*
 Route::get('/', function () {
     return view('backend.pages.index');
@@ -31,6 +32,16 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/edit/{id}', [CategoryController::class,'edit'])->name('cat.edit');
         Route::post('/edit/{id}', [CategoryController::class,'update'])->name('cat.update');
         Route::post('/destroy/{id}', [CategoryController::class,'destroy'])->name('cat.destroy');
+
+    });
+
+    Route::group(['prefix' => '/product'], function () {
+        Route::get('/manage',[ProductController::class,'index'])->name('product.manage');
+        Route::get('/create',[ProductController::class,'create'])->name('product.create');
+        Route::post('/store',[ProductController::class,'store'])->name('product.store');
+        Route::get('/edit/{id}',[ProductController::class,'edit'])->name('product.edit');
+        Route::post('/edit/{id}',[ProductController::class,'update'])->name('product.update');
+        Route::post('/destroy/{id}',[ProductController::class,'destroy'])->name('product.destroy');
 
     });
 });

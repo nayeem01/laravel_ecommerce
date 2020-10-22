@@ -136,7 +136,7 @@ class CategoryController extends Controller
             if (File::exists('backend/img/category/' . $category->image)) {
                 File::delete('backend/img/category/'. $category->image);
             }
-            $brand->delete();
+            $category->delete();
             return redirect()->route('cat.manage');
         
         }else{

@@ -1,19 +1,20 @@
-@extends('backend.layout.template')
+@extends ('backend.layout.template')
 
 @section('adminbodycontent')
 
+<!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <div class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0 text-dark">Add New Product </h1>
+                    <h1 class="m-0 text-dark">Add New Product</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
-                        <li class="breadcrumb-item active">Create </li>
+                        <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
+                        <li class="breadcrumb-item active">Add Bew Product</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -21,155 +22,149 @@
     </div>
     <!-- /.content-header -->
 
-    <!-- Main content -->
-    <div class="content-header">
+    <section class="content">
         <div class="container-fluid">
+            <!-- Info boxes -->
             <div class="row">
-                <div class="col-sm-12">
+                <div class="col-12 col-sm-12 col-md-12">
 
+                    <!-- Card Start -->
                     <div class="card card-primary">
                         <div class="card-header">
-                            <h3 class="card-title">Add product </h3>
+                            <h3 class="card-title">Add New Product</h3>
 
                             <div class="card-tools">
                                 <button type="button" class="btn btn-tool" data-card-widget="collapse"><i
                                         class="fas fa-minus"></i>
                                 </button>
                             </div>
+                            <!-- /.card-tools -->
                         </div>
+                        <!-- /.card-header -->
                         <div class="card-body" style="display: block;">
 
                             <form action="{{ route('product.store') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-group">
-                                    <label>product title</label>
-                                    <input type="text" name="title" class="form-control" required="required">
+                                    <label>Product Title</label>
+                                    <input type="text" name="title" class="form-control" required="required"
+                                        autocomplete="off">
                                 </div>
 
                                 <div class="form-group">
                                     <label>Description</label>
-                                    <textarea name="desc" class="form-control" rows="5"></textarea>
+                                    <textarea class="form-control" rows="5" name="description"></textarea>
                                 </div>
 
-
                                 <div class="form-group">
-                                    <label for=""> Brand name</label>
-                                    <select name="brand_id" class="form-control">
-                                        <option value="">please select brand</option>
-
-                                        @foreach (App\Models\Backend\Brand::orderby('id','desc')->get() as $x)
-
-                                        <option value="{{$x->id}}">{{$x->name}}</option>
-
+                                    <label>Brand</label>
+                                    <select class="form-control" name="brand_id">
+                                        <option value="">Please Select the Product Brand</option>
+                                        @foreach ( App\Models\Backend\Brand::orderBy('name', 'asc')->get() as $brand)
+                                        <option value="{{ $brand->id }}">{{ $brand->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for=""> Category name</label>
-                                    <select name="cat_id" class="form-control">
-                                        <option value="">please select Category</option>
-                                        @foreach (App\Models\Backend\Category::orderby('id','asc')->where('parent_id',
-                                        0)->get() as $x)
+                                    <label>Category</label>
+                                    <select class="form-control" name="category_id">
+                                        <option value="">Please Select the Product Brand</option>
+                                        @foreach ( App\Models\Backend\Category::orderBy('name',
+                                        'asc')->where('parent_id', 0)->get() as $category)
+                                        <option value="{{ $category->id }}">{{ $category->name }}</option>
 
-                                        <option value="{{$x->id}}">{{$x->name}}</option>
-
-                                        @foreach (App\Models\Backend\Category::orderby('id','asc')->where('parent_id',
-                                        $x->id)->get() as $child)
-
-                                        <option value="{{$child->id}}">--{{$child->name}}</option>
-
+                                        @foreach ( App\Models\Backend\Category::orderBy('name',
+                                        'asc')->where('parent_id', $category->id)->get() as $childCat)
+                                        <option value="{{ $childCat->id }}">-- {{ $childCat->name }}</option>
                                         @endforeach
-
                                         @endforeach
                                     </select>
                                 </div>
 
                                 <div class="form-group">
-                                    <label>Regular price</label>
-                                    <input type="text" name="rprice" class="form-control" required="required">
+                                    <label>Regular Price</label>
+                                    <input type="text" name="price" class="form-control" required="required"
+                                        autocomplete="off">
                                 </div>
 
                                 <div class="form-group">
-                                    <label>offer price</label>
-                                    <input type="text" name="oprice" class="form-control" required="required">
+                                    <label>Offer Price</label>
+                                    <input type="text" name="offer_price" class="form-control" autocomplete="off">
                                 </div>
 
                                 <div class="form-group">
-                                    <label>product quantity</label>
-                                    <input type="text" name="quantity" class="form-control" required="required">
+                                    <label>Product Quantity</label>
+                                    <input type="text" name="quantity" class="form-control" required="required"
+                                        autocomplete="off">
                                 </div>
 
                                 <div class="form-group">
-                                    <label>status</label>
-                                    <select name="status" class="form-control">
-
-                                        <option value="1">active</option>
-                                        <option value="0">inactive</option>
+                                    <label>Published Status</label>
+                                    <select class="form-control" name="status">
+                                        <option value="1">Active</option>
+                                        <option value="0">Inactive</option>
                                     </select>
                                 </div>
+
 
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <div class="form-group">
-                                            <label>Main thumnail</label>
-                                            <input type="file" name='p_image[]' class="form-control-file">
+                                            <label>Main Product Thumbnail Image</label>
+                                            <input type="file" name="p_image[]" class="form-control-file">
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-lg-3">
                                         <div class="form-group">
-                                            <label for="">image 2</label>
-                                            <input type="file" name='p_image[]' class="form-control-file">
+                                            <label>Image 2</label>
+                                            <input type="file" name="p_image[]" class="form-control-file">
                                         </div>
                                     </div>
 
-                                    <div class="col-md-6">
+                                    <div class="col-lg-3">
                                         <div class="form-group">
-                                            <label for="">image 3</label>
-                                            <input type="file" name='p_image[]' class="form-control-file">
+                                            <label>Image 3</label>
+                                            <input type="file" name="p_image[]" class="form-control-file">
                                         </div>
                                     </div>
 
-                                    <div class="col-md-6">
+                                    <div class="col-lg-3">
                                         <div class="form-group">
-                                            <label for="">image 3</label>
-                                            <input type="file" name='p_image[]' class="form-control-file">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="">image 4</label>
-                                            <input type="file" name='p_image[]' class="form-control-file">
+                                            <label>Image 4</label>
+                                            <input type="file" name="p_image[]" class="form-control-file">
                                         </div>
                                     </div>
 
-                                    <div class="col-md-6">
+                                    <div class="col-lg-3">
                                         <div class="form-group">
-                                            <label for="">image 5</label>
-                                            <input type="file" name='p_image[]' class="form-control-file">
+                                            <label>Image 5</label>
+                                            <input type="file" name="p_image[]" class="form-control-file">
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <input type="submit" name="addProduct" class="btn btn-primary btn-block"
-                                        value="Add new product">
+                                        value="Add New Product">
                                 </div>
+
 
                             </form>
 
                         </div>
+                        <!-- /.card-body -->
                     </div>
-                    {{-- card end --}}
+                    <!-- Card End -->
+
                 </div>
             </div>
         </div>
-        <!-- /.content -->
-    </div>
     </section>
 
 </div>
+
 @endsection

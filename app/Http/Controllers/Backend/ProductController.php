@@ -21,8 +21,10 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::orderby('id', 'desc')->get();
-        return view('backend.pages.products.manage',compact('products')); 
+        $products = Product::orderBy('id', 'desc')->get();
+
+
+        return view('backend.pages.products.manage', compact('products')); 
     }
 
     /**
@@ -56,13 +58,13 @@ class ProductController extends Controller
 
         $products = new Product();
         $products->title             = $request->title;
-        $products->desc              = $request->desc;
+        $products->desc              = $request->description;
         $products->slug              = Str::slug($request->title);
         $products->brand_id          = $request->brand_id;
-        $products->category_id       = $request->cat_id;
-        $products->price             = $request->rprice;
-        $products->offer_price       = $request->oprice;
+        $products->cat_id            = $request->category_id;
         $products->quantity          = $request->quantity;
+        $products->price             = $request->price;
+        $products->offer_price       = $request->offer_price;
         $products->status            = $request->status;
         $products->save();
 
@@ -71,7 +73,7 @@ class ProductController extends Controller
             foreach( $request->p_image  as $image )
             {
                 $img = rand(0,999999) . '.' . $image->getClientOriginalExtension();
-                $location = public_path('backend/img/products/' . $img);
+                $location = public_path('backend/img/product/' . $img);
                 Image::make($image)->save($location);
 
                 $p_image = new ProductImage;
@@ -80,7 +82,8 @@ class ProductController extends Controller
                 $p_image->save();
             }
         }
-        return 111;  
+
+        return redirect()->route('product.manage');
     
     }
 

@@ -61,16 +61,18 @@
                                     @php
                                     $i=1;
                                     @endphp
+
                                     @foreach ($products as $product)
                                     <tr>
                                         <th scope="row">{{$i}}</th>
                                         <td>
-
+                                            <img src="{{asset('backend/img/product/' . $product->imgFinder($product->id) )}}"
+                                                width='40'>
 
                                         </td>
-                                        <td>{{$product->title}}</td>
-                                        <td>{{$product-> category['name']}}</td>
-                                        <td>{{$product-> brand-> name}}</td>
+                                        <td>{{ $product->title }}</td>
+                                        <td>{{ $product->category->name}}</td>
+                                        <td>{{ $product->brand->name }}</td>
                                         <td>
                                             @if ($product->status == 1)
 
@@ -92,7 +94,7 @@
                                         <td>{{$product->quantity}} pcs</td>
                                         <td>
                                             <div class="btn-group">
-                                                <a href="{{ route('product.edit', $product->id )}}"
+                                                <a href="{{ route('product.edit', $product->id ) }}"
                                                     class="btn btn-success btn-sm">Update</a>
                                                 <a href="" class="btn btn-danger btn-sm" data-toggle="modal"
                                                     data-target="#deletecat{{ $product->id }}">Delete</a>

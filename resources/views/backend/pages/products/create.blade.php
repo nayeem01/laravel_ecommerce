@@ -47,8 +47,7 @@
                                 @csrf
                                 <div class="form-group">
                                     <label>Product Title</label>
-                                    <input type="text" name="title" class="form-control" required="required"
-                                        autocomplete="off">
+                                    <input type="text" name="title" class="form-control" required="required">
                                 </div>
 
                                 <div class="form-group">
@@ -84,19 +83,17 @@
 
                                 <div class="form-group">
                                     <label>Regular Price</label>
-                                    <input type="text" name="price" class="form-control" required="required"
-                                        autocomplete="off">
+                                    <input type="text" name="price" class="form-control" required="required">
                                 </div>
 
                                 <div class="form-group">
                                     <label>Offer Price</label>
-                                    <input type="text" name="offer_price" class="form-control" autocomplete="off">
+                                    <input type="text" name="offer_price" class="form-control">
                                 </div>
 
                                 <div class="form-group">
                                     <label>Product Quantity</label>
-                                    <input type="text" name="quantity" class="form-control" required="required"
-                                        autocomplete="off">
+                                    <input type="text" name="quantity" class="form-control" required="required">
                                 </div>
 
                                 <div class="form-group">
@@ -118,28 +115,28 @@
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-lg-3">
+                                    <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Image 2</label>
                                             <input type="file" name="p_image[]" class="form-control-file">
                                         </div>
                                     </div>
 
-                                    <div class="col-lg-3">
+                                    <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Image 3</label>
                                             <input type="file" name="p_image[]" class="form-control-file">
                                         </div>
                                     </div>
 
-                                    <div class="col-lg-3">
+                                    <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Image 4</label>
                                             <input type="file" name="p_image[]" class="form-control-file">
                                         </div>
                                     </div>
 
-                                    <div class="col-lg-3">
+                                    <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Image 5</label>
                                             <input type="file" name="p_image[]" class="form-control-file">
